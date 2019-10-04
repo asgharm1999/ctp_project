@@ -1,32 +1,31 @@
-import React from 'react';
-import Header from './homepage/Header.js';
-import MapGlobal from './homepage/MapGlobal.js';
-import Login from './homepage/Login.js';
-import { Container, Row, Col } from 'reactstrap';
-import "./App.css";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './Home';
+import About from './About';
+import Contact from './Contact';
+import NoMatch from './NoMatch';
+import { Layout } from './components/Layout';
+import { NavigationBar } from './components/NavigationBar';
+import { Jumbotron } from './components/Jumbotron';
 
 
 export default class App extends React.Component {
   render() {
-      return (
-      <Container full-width={true}>
-      	<Row>
-      		<Col>
-      			<Header />
-      		</Col>
-      	</Row>
-      	<Row>
-      		<Col>
-      			<Login />
-      		</Col>
-      	</Row>
-      	<Row>
-      		<Col>
-      		   <MapGlobal />
-			</Col>
-      	</Row>
-      </Container>
-    );
+    return(
+      <React.Fragment>
+      <NavigationBar />
+      <Jumbotron />
+      <Layout>
+        <Router>
+          <Switch>
+             <Route exact path="/" component={ Home }/>
+              <Route path="/about" component={ About }/>
+              <Route path="/contact" component={ Contact }/>
+              <Route component={ NoMatch }/>
+          </Switch>
+        </Router>
+      </Layout>
+      </React.Fragment>
+      );
   }
 }
-
