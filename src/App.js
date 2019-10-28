@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
-import NoMatch from './NoMatch';
+import Map from './components/Map';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import NoMatch from './pages/NoMatch';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
 import { Jumbotron } from './components/Jumbotron';
@@ -14,6 +15,7 @@ export default class App extends React.Component {
     return(
       <React.Fragment>
       <NavigationBar />
+      <Map />
       <Jumbotron />
       <Layout>
         <Router>
