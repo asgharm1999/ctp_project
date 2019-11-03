@@ -1,22 +1,27 @@
-.App {
-  text-align: center;
+body {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
+#root {
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.map {
+  height: 100%;
+}
+
+.login-form {
+  z-index: 999;
+  position: absolute;
+  top: 80px;
+  right: 5px;
+  width: 20vw;
+  height: 56.5vh;
+}
+
+.signin-form {
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
 }

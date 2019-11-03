@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Styles = styled.div`
 	.navbar {
-		background-color: black;
+		background-color: #292b2c;
 		height: 12vh;
 	}
 
@@ -24,6 +24,8 @@ const Styles = styled.div`
 	.navbar-brand:hover {
 		color: teal;
 	}
+
+
 
 `;
 
