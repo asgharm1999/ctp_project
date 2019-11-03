@@ -162,7 +162,7 @@ export default class SignUp extends React.Component {
 			  		<Row>
 			  			<Col>
 						  <Button variant="info" type="submit">
-						  Sign Up</Button>
+						  Join</Button>
 					  	</Col>
 					 </Row>
 				</Form>
