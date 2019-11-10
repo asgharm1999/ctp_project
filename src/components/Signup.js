@@ -7,6 +7,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
+const SignUp_Wrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	height: 60vh;
+`;
+
 
 export default class SignUp extends React.Component {
 	constructor(props){
@@ -16,13 +23,18 @@ export default class SignUp extends React.Component {
 			email: '',
 			confirmEmail: '',
 			password: '',
-			confirmPassword: ''
+			confirmPassword: '',
+			user_name: '',
+			id: null,
+			created_on: null
+
 		}
 	}
 	
 
 	handleSubmit = (event) => {
 		event.preventDefault();
+
 		const data = this.state;
 		console.log('Log in data is: ', data);
 
@@ -92,8 +104,8 @@ export default class SignUp extends React.Component {
 		const {name, email, confirmEmail, password, confirmPassword} = this.state;
 		return(
 			//Card style is in App.css
-	
-			<Card bg="dark" text="white" className="signup-form" style={{ width: '50rem' }}>
+			<SignUp_Wrapper>
+			<Card className="signup-form" bg="dark" text="white" style={{ width: '50rem' }}>
 			<Card.Body>
             	<Card.Title>Sign up below!</Card.Title>
             	<Card.Text>
@@ -169,6 +181,7 @@ export default class SignUp extends React.Component {
 			</Container>
 		</Card.Body>
         </Card>
+        </SignUp_Wrapper>
 
 
 		);

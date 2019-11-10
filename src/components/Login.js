@@ -83,8 +83,20 @@ render() {
 
                 <Container>
                 	<Row>
-	                	<Col> <Button type="submit" variant="info"><FontSize>Log in</FontSize></Button></Col>
-	    				<Col> <Button type="button" variant="info"><FontSize>Sign up</FontSize></Button></Col>
+	                	<Col> 
+                    <Button 
+                    type="submit" 
+                    variant="info">
+                    <FontSize>Log in</FontSize>
+                    </Button>
+                    </Col>
+	    				       
+                    <Col> 
+                    <Button type="button" 
+                    variant="info">
+                    <FontSize>Sign up</FontSize>
+                    </Button>
+                    </Col>
                 	</Row>
                 </Container>
              

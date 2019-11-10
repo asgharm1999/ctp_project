@@ -34,18 +34,11 @@ export default class MapComponent extends React.Component {
       //browser method grabs user location coordinates with permission
       navigator.geolocation.getCurrentPosition((position) => {
         
-        this.setState({
-          location: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          },
-            haveUsersLocation: true,
-            zoom: 13,
-        });
+      //if user hits accept, we receive a position object, if so,
+      //we make an api call to receive user location (provides more accurate pin)
+      if(position) {
 
-      }, 
-      //if above method fails we use the api call below to find user's location
-      () => {
+       console.log(position);
         console.log("Did not receive location");
         fetch('https://ipapi.co/json')
           .then(res => res.json())
@@ -61,6 +54,12 @@ export default class MapComponent extends React.Component {
                 zoom: 13,
             });
           });
+         }
+      }, 
+
+      //if above method fails we use the api call below to find user's location
+      () => {
+  
       });
     }
 

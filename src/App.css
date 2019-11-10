@@ -15,13 +15,14 @@ body {
 .login-form {
   z-index: 999;
   position: absolute;
-  top: 80px;
+  top: 85px;
   right: 5px;
-  width: 20vw;
-  height: 56.5vh;
+  height: 380px;
 }
 
 .signin-form {
-  align-items: center;
+  height: 100vh; /* Magic here */
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
