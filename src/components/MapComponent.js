@@ -11,10 +11,39 @@ const myIcon = L.icon({
   iconSize: [25, 41],
   iconAnchor: [12.5, 41],
   popupAnchor: [0, -41],
-})
+});
+
+
+const testUser1 = ({
+    id: 1,
+    location: {
+      latitude: 45.606406099999995,
+      longitude: 53.7947449
+    }
+});
+
+const testUser2 = ({
+    id: 2,
+    location: {
+      latitude: 60.606406099999995,
+      longitude: 22.7947449
+    }
+});
+
+const testUser3 = ({
+    id: 3,
+    location: {
+      latitude: 11.606406099999995,
+      longitude: 88.7947449
+    }
+});
+
+const userList = [testUser1, testUser2, testUser3];
+
+console.log(userList);
 
 export default class MapComponent extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,20 +52,35 @@ export default class MapComponent extends React.Component {
         longitude: -73.935242,
       },
       haveUsersLocation: false,
-      zoom: 2
-
+      zoom: 2,
+      users: [],
+      usersLoaded: false
     }
   }
+
+    //grabs list of users
+    displayUsers() {
+        this.setState({
+          users: userList,
+          usersLoaded: true
+        });
+      }
+  
+
 
     //Asks for users location when map renders, then places a pin based on the position
     //coordinates
     componentDidMount() {
+    
+      //calls method to display all users
+      this.displayUsers();
+
       //browser method grabs user location coordinates with permission
       navigator.geolocation.getCurrentPosition((position) => {
-        
+      
       //if user hits accept, we receive a position object, if so,
       //we make an api call to receive user location (provides more accurate pin)
-      if(position) {
+      if (position) {
 
        console.log(position);
         console.log("Did not receive location");
@@ -57,14 +101,19 @@ export default class MapComponent extends React.Component {
          }
       }, 
 
-      //if above method fails we use the api call below to find user's location
       () => {
   
       });
     }
 
+
   render() {
+    //finds whether displayUsers() has grabbed users
+    const haveUsersList = this.state.usersLoaded;
+
+    //grabs current users position, and passes lat, long info into marker
     const position = [this.state.location.latitude, this.state.location.longitude];
+
     return (
       <div className="map">
         <Map className="map" center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
@@ -73,13 +122,29 @@ export default class MapComponent extends React.Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
         {/* ternary operator ? If we have users location we render a marker and it on the map : If not
-        they'll see our default map position */}
-          {this.state.haveUsersLocation ? 
-           <Marker position={position} icon={myIcon}>
+        they'll see our default map position/state */}
+        {this.state.haveUsersLocation ? 
+           <Marker 
+           position={position} 
+           icon={myIcon}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
-          </Marker> : '' }
+          </Marker> : '' 
+        }
+      
+        {/*this grabs all users and their locations (lats and long) if haveUsersList = true in state*/}
+        
+        {haveUsersList ? this.state.users.map( user => (
+          <Marker key={user.id}
+          position={[user.location.latitude, user.location.longitude]} 
+          icon={myIcon}>
+            <Popup>
+              New Pin. <br /> Easily customizable.
+            </Popup>
+          </Marker> 
+        )) : ''}
+        {console.log("After haveUsersList check" + this.state.users)}
         </Map>
       </div>
     );
