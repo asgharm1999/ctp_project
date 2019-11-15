@@ -3,6 +3,7 @@ import L from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
+import Profile from './Profile.js';
 
 
 //creates icon used for marker/pin image
@@ -19,7 +20,8 @@ const testUser1 = ({
     location: {
       latitude: 45.606406099999995,
       longitude: 53.7947449
-    }
+    },
+    message: "Hi, my name is Elias"
 });
 
 const testUser2 = ({
@@ -27,7 +29,8 @@ const testUser2 = ({
     location: {
       latitude: 60.606406099999995,
       longitude: 22.7947449
-    }
+    },
+    message: "Hey!"
 });
 
 const testUser3 = ({
@@ -35,12 +38,12 @@ const testUser3 = ({
     location: {
       latitude: 11.606406099999995,
       longitude: 88.7947449
-    }
+    },
+    message: "Hello world!"
 });
 
 const userList = [testUser1, testUser2, testUser3];
 
-console.log(userList);
 
 export default class MapComponent extends React.Component {
 
@@ -82,12 +85,9 @@ export default class MapComponent extends React.Component {
       //we make an api call to receive user location (provides more accurate pin)
       if (position) {
 
-       console.log(position);
-        console.log("Did not receive location");
         fetch('https://ipapi.co/json')
           .then(res => res.json())
           .then(location => {
-            console.log(location);
 
             this.setState({
               location: {
@@ -128,6 +128,7 @@ export default class MapComponent extends React.Component {
            position={position} 
            icon={myIcon}>
             <Popup>
+            <Profile/>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker> : '' 
@@ -140,11 +141,11 @@ export default class MapComponent extends React.Component {
           position={[user.location.latitude, user.location.longitude]} 
           icon={myIcon}>
             <Popup>
-              New Pin. <br /> Easily customizable.
+              {user.message} <br /> Easily customizable.
             </Popup>
           </Marker> 
         )) : ''}
-        {console.log("After haveUsersList check" + this.state.users)}
+
         </Map>
       </div>
     );
