@@ -1,0 +1,28 @@
+body {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}
+
+.map {
+  height: 100%;
+}
+
+.login-form {
+  z-index: 999;
+  position: absolute;
+  top: 85px;
+  right: 5px;
+  height: 380px;
+}
+
+.signin-form {
+  height: 100vh; /* Magic here */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
