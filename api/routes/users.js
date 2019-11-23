@@ -17,8 +17,13 @@ router.get('/', (req, res) =>
 // Add a user
 router.get('/add', (req, res) => {
 	const data = {
+<<<<<<< HEAD
 		first_name: 'Johnscvsd',
 		last_name: 'Smithsdc',
+=======
+		first_name: 'John',
+		last_name: 'Smith',
+>>>>>>> 2b9f6614a3865d2f0ea8787de51257dc7f7dc494
 		email: 'js@gmail.com',
 		password: '123456',
 		travel_to: 'LA',

@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+<<<<<<< HEAD
 const Users = require('./models/Users.js');
 const router = express.Router();
+=======
+>>>>>>> 2b9f6614a3865d2f0ea8787de51257dc7f7dc494
 
 // Database (brings in database connection from ./config/database)
 const db = require('./config/database');
@@ -17,6 +20,7 @@ app.get('/', (req, res) => res.send('INDEX'));
 //api for users list
 //populates map, but we should populate map via an api fetch call
 //this is only temp 
+<<<<<<< HEAD
 
 app.get('/api/users', (req,res) => {
   console.log('/api/users called');
@@ -42,6 +46,9 @@ app.post('/api/users',
 /*
 app.get('/api/users', (req, res) => {
 
+=======
+app.get('/api/users', (req, res) => {
+>>>>>>> 2b9f6614a3865d2f0ea8787de51257dc7f7dc494
  const users = [
     {id: 1, 
  	firstName: 'First1',
@@ -73,13 +80,20 @@ app.get('/api/users', (req, res) => {
   	userName: 'TestUser3',
   	email: 'TestUser3@gmail.com'},
  ];
+<<<<<<< HEAD
  
+=======
+>>>>>>> 2b9f6614a3865d2f0ea8787de51257dc7f7dc494
 
 
   	res.json(users);
 });
 
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 2b9f6614a3865d2f0ea8787de51257dc7f7dc494
 // Users routes
 app.use('/users', require('./routes/users'));
 
