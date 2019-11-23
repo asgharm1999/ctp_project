@@ -1,7 +1,8 @@
 const express = require('express');
-const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
+const Users = require('./models/Users.js');
+const router = express.Router();
 
 // Database (brings in database connection from ./config/database)
 const db = require('./config/database');
@@ -16,7 +17,31 @@ app.get('/', (req, res) => res.send('INDEX'));
 //api for users list
 //populates map, but we should populate map via an api fetch call
 //this is only temp 
+
+app.get('/api/users', (req,res) => {
+  console.log('/api/users called');
+  Users.findAll({})
+    .then(user => res.json(user));
+});
+
+app.post('/api/users',
+  //passport.isAuthenticated(),
+  (req, res) => {
+    let { content } = req.body;
+    
+    Users.create({ content })
+      .then(post => {
+        res.status(201).json(post);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  }
+);
+
+/*
 app.get('/api/users', (req, res) => {
+
  const users = [
     {id: 1, 
  	firstName: 'First1',
@@ -48,12 +73,13 @@ app.get('/api/users', (req, res) => {
   	userName: 'TestUser3',
   	email: 'TestUser3@gmail.com'},
  ];
+ 
 
 
   	res.json(users);
 });
 
-
+*/
 // Users routes
 app.use('/users', require('./routes/users'));
 

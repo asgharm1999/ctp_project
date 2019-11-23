@@ -113,6 +113,7 @@ export default class MapComponent extends React.Component {
           position={[user.location.latitude, user.location.longitude]} 
           icon={myIcon}>
             <Popup>
+            <Profile />
               {user.message} <br /> Easily customizable.
             </Popup>
           </Marker> 
