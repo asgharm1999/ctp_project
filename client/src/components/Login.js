@@ -6,6 +6,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
+import earthImage from '../assets/earth-globe.svg';
+import auth from '../services/auth';
+
 
 
 const FontSize = styled.header`
@@ -21,16 +24,30 @@ export default class Login extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			email: '',
+			userLoggedIn: false,
+      failed: false, 
+      email: '',
 			password: ''
 		}
 	}
+
+  checkUserStatus() {
+    this.props.isUserLoggedIn(this.state.userLoggedIn);
+  }
 	
 
 handleSubmit = (event) => {
 	event.preventDefault();
-	const data = this.state;
-	console.log('Log in data is: ', data);
+	let { email, password } = this.state;
+  auth.authenticate(email, password)
+      .then((user) => {
+        this.setState({ userLoggedIn: true });
+      })
+      .catch((err) => {
+        this.setState({ failed: true });
+      });
+
+	console.log('Logged in', this.state.failed);
 
 }
 
@@ -43,13 +60,33 @@ handleInputChange = (event) => {
 
 
 render() {
+
+  const {isUserLoggedIn } = this.state;
 	const {email, password} = this.state;
+
+  console.log(isUserLoggedIn);
 	return(
 		<div>
 		{/* Card style is in App.css*/}
-        <Card className="login-form" style={{ width: '17rem' }}>
+        <Card className="login-form" style={{ width: '16.5rem' }}>
           <Card.Body>
-            <Card.Title>Welcome to Global-Port</Card.Title>
+          <Container>
+            <Row>
+                <Col sm={8}>
+                <Card.Title>Welcome to Global-Port</Card.Title>
+                </Col>
+                <Col sm={4}>
+                    <img className="navbar-image"
+                    alt="Test"
+                    src={earthImage}
+                    width="40px"
+                    height="40px"
+                    href="/"
+                />
+                </Col>
+
+              </Row>
+            </Container>
             <Card.Text>
               Connect with fellow travelers and explore the world!
             </Card.Text>

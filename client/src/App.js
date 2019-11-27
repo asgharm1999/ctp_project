@@ -14,11 +14,24 @@ import './App.css';
 
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isUserLoggedIn: false
+    }
+  }
+
+  checkUserStatus(status) {
+      this.setState({
+        isUserLoggedIn: status
+      })
+  }
+
   render() {
     return(
       <React.Fragment>
       <NavigationBar />
-      <MapComponent />
+      <MapComponent isUserLoggedIn={this.state.isUserLoggedIn} />
       <Jumbotron />
       <Layout>
         <Router>
