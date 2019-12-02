@@ -14,11 +14,16 @@ const myIcon = L.icon({
   popupAnchor: [0, -41],
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> asghar
 export default class MapComponent extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       location: {
         latitude: 40.760610,
         longitude: -73.935242,
@@ -27,12 +32,28 @@ export default class MapComponent extends React.Component {
       zoom: 2,
       users: [],
       usersLoaded: false
+=======
+      latitude: 40.760610,
+      longitude: -73.935242,
+      haveUsersLocation: false,
+      zoom: 2,
+      users: [],
+      usersLoaded: false,
+      signupClicked: false,
+      loginClicked: false,
+      draggable: false,
+      isAuthenticated: false
+>>>>>>> asghar
     }
   }
 
     //grabs list of users
     displayUsers() {
+<<<<<<< HEAD
       fetch('/api/users')
+=======
+      fetch('/api/users/')
+>>>>>>> asghar
         .then(res => res.json())
         .then(users => 
         this.setState({
@@ -40,12 +61,25 @@ export default class MapComponent extends React.Component {
           usersLoaded: true
         }, () => console.log('Users fetched...', users)));
       }
+<<<<<<< HEAD
   
+=======
+
+    checkUserStatus() {
+    this.props.isUserLoggedIn(this.state.userLoggedIn);
+  }
+
+>>>>>>> asghar
 
 
     //Asks for users location when map renders, then places a pin based on the position
     //coordinates
     componentDidMount() {
+<<<<<<< HEAD
+=======
+
+      
+>>>>>>> asghar
     
       //calls method to display all users
       this.displayUsers();
@@ -62,10 +96,15 @@ export default class MapComponent extends React.Component {
           .then(location => {
 
             this.setState({
+<<<<<<< HEAD
               location: {
                 latitude: location.latitude,
                 longitude: location.longitude
               },
+=======
+                latitude: location.latitude,
+                longitude: location.longitude,
+>>>>>>> asghar
                 haveUsersLocation: true,
                 zoom: 13,
             });
@@ -84,11 +123,22 @@ export default class MapComponent extends React.Component {
     const haveUsersList = this.state.usersLoaded;
 
     //grabs current users position, and passes lat, long info into marker
+<<<<<<< HEAD
     const position = [this.state.location.latitude, this.state.location.longitude];
 
     return (
       <div className="map">
         <Map className="map" center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
+=======
+    const position = [this.state.latitude, this.state.longitude];
+
+    return (
+      <div className="map">
+        <Map className="map" 
+        center={position} 
+        zoom={this.state.zoom} 
+        scrollWheelZoom={false}>
+>>>>>>> asghar
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -98,7 +148,12 @@ export default class MapComponent extends React.Component {
         {this.state.haveUsersLocation ? 
            <Marker 
            position={position} 
+<<<<<<< HEAD
            icon={myIcon}>
+=======
+           icon={myIcon}
+           draggable={true}>
+>>>>>>> asghar
             <Popup>
             <Profile />
               A pretty CSS3 popup. <br /> Easily customizable.
@@ -108,15 +163,27 @@ export default class MapComponent extends React.Component {
       
         {/*this grabs all users and their locations (lats and long) if haveUsersList = true in state*/}
         
+<<<<<<< HEAD
         {haveUsersList ? this.state.users.map( user => (
           <Marker key={user.id}
           position={[user.location.latitude, user.location.longitude]} 
+=======
+
+        {haveUsersList ? this.state.users.map( user => (
+          <Marker key={user.id}
+          position={[user.latitude, user.longitude]} 
+>>>>>>> asghar
           icon={myIcon}>
             <Popup>
               {user.message} <br /> Easily customizable.
             </Popup>
           </Marker> 
+<<<<<<< HEAD
         )) : ''}
+=======
+        )) : ''
+      }
+>>>>>>> asghar
 
         </Map>
       </div>
