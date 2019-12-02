@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 // setup passport and session cookies
 
 app.use(expressSession({ 
-  secret: 'secret session',//process.env.SESSION_SECRET, 
+  secret: 'super_long_secret_that_should_be_replaced', //process.env.SESSION_SECRET, 
   resave: false,
   saveUninitialized: true }));
 app.use(passport.initialize());

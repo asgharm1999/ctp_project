@@ -15,13 +15,44 @@ body {
 .login-form {
   z-index: 999;
   position: absolute;
-  top: 85px;
+  top: 5px;
   right: 5px;
-<<<<<<< HEAD
-  height: 380px;
-=======
   height: 400px;
->>>>>>> asghar
+  width: 16.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-form-failed {
+  z-index: 999;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 460px;
+  width: 16.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-form:hover {
+   box-shadow: 1px 1px 2px black, 0 0 25px teal, 0 0 5px teal;
+}
+
+.signout {
+  z-index: 999;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 40px;
+  width: 10.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.alert-button {
+  text-align: center;
+  right: 2px;
+  margin-top: 10px;
+  width: 12rem;
+  height: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .signin-form {
@@ -29,8 +60,4 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> asghar

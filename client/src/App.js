@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MapComponent from './components/MapComponent';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -12,49 +14,47 @@ import './App.css';
 
 
 
-
 export default class App extends React.Component {
-<<<<<<< HEAD
-=======
   constructor(props) {
     super(props);
     this.state = {
-      isUserLoggedIn: false
+      isUserLoggedIn: false,
+      userLat: null,
+      userLong: null
     }
   }
 
-  checkUserStatus(status) {
+ //Finds if user is logged in | passed down to login component: App.js -> Home.js -> Login.js
+  getUserStatus(status) {
       this.setState({
         isUserLoggedIn: status
-      })
+      }) 
   }
 
->>>>>>> asghar
+  getUserLocation(location) {
+      this.setState({
+        userLat: location.coords.latitude,
+        userLong: location.coords.longitude
+      }) 
+  }
+
+
   render() {
+
+    const userLocation = this.state;
+
     return(
       <React.Fragment>
       <NavigationBar />
-<<<<<<< HEAD
-      <MapComponent />
-=======
-      <MapComponent isUserLoggedIn={this.state.isUserLoggedIn} />
->>>>>>> asghar
+      <MapComponent 
+        userstatus={this.state.isUserLoggedIn}  
+        getUserLocation={(e) => this.getUserLocation(e)} />
+      <Login 
+        getUserStatus={(e) => this.getUserStatus(e)} />
       <Jumbotron />
       <Layout>
-        <Router>
-          <Switch>
-             <Route exact path="/" component={ Home }/>
-<<<<<<< HEAD
-              <Route path="/about" component={ About }/>
-              <Route path="/contact" component={ Contact }/>
-              <Route component={ NoMatch }/>
-=======
-              {/* <Route path="/about" component={ About }/>
-              <Route path="/contact" component={ Contact }/>
-              <Route component={ NoMatch }/> */}
->>>>>>> asghar
-          </Switch>
-        </Router>
+        <Home />
+        <Signup userlat={this.state.userLat} userlong={this.state.userLong}/>
       </Layout>
       </React.Fragment>
       );

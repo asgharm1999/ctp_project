@@ -1,38 +1,6 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
-<<<<<<< HEAD
-
-const Styles = styled.div`
-	.navbar {
-		background-color: black;
-		height: 80px;
-	}
-
-	.navbar-brand {
-		color: white;
-	}
-
-	.navbar-brand:hover {
-		color: teal;
-	}
-
-
-`;
-
-export const NavigationBar = () => (
-	<Styles>
-		<Navbar expand="lg" className="navbar .z-depth-2" bg="dark">
-			<Navbar.Brand className="navbar-brand" href="/">Global-Port</Navbar.Brand>
-			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-			<Navbar.Collapse id="responsive-navbar-nav">
-				<Nav className="ml-auto" variant="tabs">
-					{/*<Nav.Item><Nav.Link className="nav-item" href="/">Home</Nav.Link></Nav.Item>
-					<Nav.Item><Nav.Link className="nav-item" href="/about">About</Nav.Link></Nav.Item>
-					<Nav.Item><Nav.Link className="nav-item" href="/contact">Contact</Nav.Link></Nav.Item>*/}
-				</Nav>
-			</Navbar.Collapse>
-=======
 import mapImage from '../assets/map.svg';
 
 const Styles = styled.div`
@@ -60,10 +28,7 @@ const Styles = styled.div`
 	}
 
 	.navbar-text:hover {
-
 		box-shadow: 10px 5px 5px rgba(33,33,33,.7); 
-
-	
 	}
 
 	.navbar-image {
@@ -91,10 +56,9 @@ export const NavigationBar = () => (
 		      />{' '}
 
 			</Navbar.Brand>
-		<Navbar.Text className="navbar-text"> 
+		{/*<Navbar.Text className="navbar-text"> 
 			<a href="/" className="navbar-text-title">Global-Port</a>
-		</Navbar.Text>
->>>>>>> asghar
+		</Navbar.Text>*/}
 		</Navbar>
 
 	</Styles>

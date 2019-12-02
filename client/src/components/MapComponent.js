@@ -4,6 +4,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
 import Profile from './Profile.js';
+import auth from '../services/auth';
 
 
 //creates icon used for marker/pin image
@@ -14,79 +15,57 @@ const myIcon = L.icon({
   popupAnchor: [0, -41],
 });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> asghar
 export default class MapComponent extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      location: {
-        latitude: 40.760610,
-        longitude: -73.935242,
-      },
-      haveUsersLocation: false,
-      zoom: 2,
-      users: [],
-      usersLoaded: false
-=======
       latitude: 40.760610,
-      longitude: -73.935242,
+      longitude: -74.935242,
       haveUsersLocation: false,
       zoom: 2,
       users: [],
       usersLoaded: false,
-      signupClicked: false,
-      loginClicked: false,
       draggable: false,
-      isAuthenticated: false
->>>>>>> asghar
     }
   }
 
+    findUserLocation(position) {
+      const location = position;
+      this.props.getUserLocation(location);
+    }
+
+
     //grabs list of users
     displayUsers() {
-<<<<<<< HEAD
-      fetch('/api/users')
-=======
+
       fetch('/api/users/')
->>>>>>> asghar
         .then(res => res.json())
         .then(users => 
         this.setState({
           users: users,
           usersLoaded: true
-        }, () => console.log('Users fetched...', users)));
-      }
-<<<<<<< HEAD
+        }/*, () => console.log('Users fetched...', users)*/));
+
   
-=======
 
-    checkUserStatus() {
-    this.props.isUserLoggedIn(this.state.userLoggedIn);
-  }
-
->>>>>>> asghar
+     }
 
 
     //Asks for users location when map renders, then places a pin based on the position
     //coordinates
     componentDidMount() {
-<<<<<<< HEAD
-=======
 
-      
->>>>>>> asghar
+
+        //makes api call to grab users
+
+        this.displayUsers();
+ 
     
-      //calls method to display all users
-      this.displayUsers();
-
       //browser method grabs user location coordinates with permission
       navigator.geolocation.getCurrentPosition((position) => {
-      
+  
       //if user hits accept, we receive a position object, if so,
       //we make an api call to receive user location (provides more accurate pin)
       if (position) {
@@ -96,23 +75,19 @@ export default class MapComponent extends React.Component {
           .then(location => {
 
             this.setState({
-<<<<<<< HEAD
-              location: {
-                latitude: location.latitude,
-                longitude: location.longitude
-              },
-=======
-                latitude: location.latitude,
-                longitude: location.longitude,
->>>>>>> asghar
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
                 haveUsersLocation: true,
                 zoom: 13,
             });
           });
          }
+         this.findUserLocation(position);
+
       }, 
 
       () => {
+        console.log("error");
   
       });
     }
@@ -122,38 +97,33 @@ export default class MapComponent extends React.Component {
     //finds whether displayUsers() has grabbed users
     const haveUsersList = this.state.usersLoaded;
 
-    //grabs current users position, and passes lat, long info into marker
-<<<<<<< HEAD
-    const position = [this.state.location.latitude, this.state.location.longitude];
+    const test = this.props.userstatus;
 
-    return (
-      <div className="map">
-        <Map className="map" center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
-=======
+
+    const isUserLoggedIn = this.state.isUserLoggedIn;
+    //grabs current users position, and passes lat, long info into marker
     const position = [this.state.latitude, this.state.longitude];
 
     return (
       <div className="map">
+
         <Map className="map" 
         center={position} 
         zoom={this.state.zoom} 
         scrollWheelZoom={false}>
->>>>>>> asghar
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+
+
         {/* ternary operator ? If we have users location we render a marker and it on the map : If not
         they'll see our default map position/state */}
         {this.state.haveUsersLocation ? 
            <Marker 
            position={position} 
-<<<<<<< HEAD
-           icon={myIcon}>
-=======
            icon={myIcon}
            draggable={true}>
->>>>>>> asghar
             <Popup>
             <Profile />
               A pretty CSS3 popup. <br /> Easily customizable.
@@ -163,27 +133,18 @@ export default class MapComponent extends React.Component {
       
         {/*this grabs all users and their locations (lats and long) if haveUsersList = true in state*/}
         
-<<<<<<< HEAD
-        {haveUsersList ? this.state.users.map( user => (
-          <Marker key={user.id}
-          position={[user.location.latitude, user.location.longitude]} 
-=======
-
-        {haveUsersList ? this.state.users.map( user => (
+        {/*if userstatus (passed down from App.js is true, meaning they've logged in
+      and are an authenticate user) is true, we render all users*/}
+        {this.props.userstatus && haveUsersList ? this.state.users.map( user => (
           <Marker key={user.id}
           position={[user.latitude, user.longitude]} 
->>>>>>> asghar
           icon={myIcon}>
             <Popup>
               {user.message} <br /> Easily customizable.
             </Popup>
           </Marker> 
-<<<<<<< HEAD
-        )) : ''}
-=======
         )) : ''
       }
->>>>>>> asghar
 
         </Map>
       </div>

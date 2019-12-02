@@ -1,10 +1,6 @@
 import React from 'react';
 import { Jumbotron as Jumbo, Container } from 'react-bootstrap';
 import styled from 'styled-components';
-<<<<<<< HEAD
-import sunset from '../assets/sunset.jpg';
-=======
->>>>>>> asghar
 import aerial from '../assets/aerial.jpg';
 
 const Styles = styled.div`

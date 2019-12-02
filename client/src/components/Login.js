@@ -1,17 +1,17 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Alert from 'react-bootstrap/Alert';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
-<<<<<<< HEAD
-=======
 import earthImage from '../assets/earth-globe.svg';
 import auth from '../services/auth';
+import Signup from './Signup.js';
 
->>>>>>> asghar
+
 
 
 const FontSize = styled.header`
@@ -27,72 +27,94 @@ export default class Login extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-<<<<<<< HEAD
-			email: '',
-			password: ''
-		}
-	}
-=======
-			userLoggedIn: false,
+			isAuthenticated: false,
       failed: false, 
       email: '',
-			password: ''
+			password: '',
+      signupClicked: false
 		}
 	}
 
-  checkUserStatus() {
-    this.props.isUserLoggedIn(this.state.userLoggedIn);
+  findUserLogInStatus() {
+    this.props.getUserStatus(this.state.isAuthenticated);
   }
->>>>>>> asghar
-	
 
-handleSubmit = (event) => {
-	event.preventDefault();
-<<<<<<< HEAD
-	const data = this.state;
-	console.log('Log in data is: ', data);
-=======
-	let { email, password } = this.state;
-  auth.authenticate(email, password)
-      .then((user) => {
-        this.setState({ userLoggedIn: true });
-      })
-      .catch((err) => {
-        this.setState({ failed: true });
+  handleSubmit = (event) => {
+  	event.preventDefault();
+  	let { email, password } = this.state;
+    auth.authenticate(email, password)
+        .then((user) => {
+          if(user) {
+         
+          this.setState({ 
+            isAuthenticated: true,
+            failed: false
+          });
+
+          this.findUserLogInStatus();
+
+          }
+          
+        })
+        .catch((err) => {
+          if(err) {
+          console.log('This is err: ' , err);
+          this.setState({ 
+            failed: true,
+            isAuthenticated: false
+          });
+
+          }
+          
+        });
+
+        this.findUserLogInStatus();
+
+    }
+
+  handleSignOut = (event) => {
+    
+    auth.signout(event)
+    .then((event) => {
+        this.setState({
+        isAuthenticated: false
       });
 
-	console.log('Logged in', this.state.failed);
->>>>>>> asghar
+      this.findUserLogInStatus();
 
-}
+    })
 
-handleInputChange = (event) => {
-	this.setState({
-			[event.target.name]: event.target.value
-	})
 
-}
+  }
+
+  handleInputChange = (event) => {
+  	this.setState({
+  			[event.target.name]: event.target.value
+  	})
+
+  }
+
+
 
 
 render() {
-<<<<<<< HEAD
-	const {email, password} = this.state;
-	return(
-		<div>
-		{/* Card style is in App.css*/}
-        <Card className="login-form" style={{ width: '17rem' }}>
-          <Card.Body>
-            <Card.Title>Welcome to Global-Port</Card.Title>
-=======
 
-  const {isUserLoggedIn } = this.state;
+
+  const { isAuthenticated, failed} = this.state;
 	const {email, password} = this.state;
 
-  console.log(isUserLoggedIn);
+  console.log("Checking for authentication", auth.isAuthenticated);
+
+  console.log("Authentication update? ", isAuthenticated, "Failed ? ", failed);
 	return(
 		<div>
+
 		{/* Card style is in App.css*/}
-        <Card className="login-form" style={{ width: '16.5rem' }}>
+
+   
+
+      {!this.state.isAuthenticated ? 
+        <Card className={this.state.failed ? "login-form-failed" : "login-form"} >
           <Card.Body>
           <Container>
             <Row>
@@ -111,13 +133,12 @@ render() {
 
               </Row>
             </Container>
->>>>>>> asghar
             <Card.Text>
               Connect with fellow travelers and explore the world!
             </Card.Text>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
+                  <Form.Label>Email address:</Form.Label>
                   <Form.Control
                     onChange={(e) => this.handleInputChange(e)} 
                     size="sm"
@@ -131,7 +152,7 @@ render() {
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>Password:</Form.Label>
                   <Form.Control 
                     onChange={(e) => this.handleInputChange(e)}
                     size="sm"
@@ -147,10 +168,12 @@ render() {
 	                	<Col> 
                     <Button 
                     type="submit" 
-                    variant="info">
+                    variant="info"
+                    onClick={(e) => this.handleSubmit(e)}>
                     <FontSize>Log in</FontSize>
                     </Button>
                     </Col>
+
 	    				       
                     <Col> 
                     <Button type="button" 
@@ -158,13 +181,40 @@ render() {
                     <FontSize>Sign up</FontSize>
                     </Button>
                     </Col>
+            
+            
                 	</Row>
                 </Container>
+
+                {this.state.failed ? 
+                  <Container>
+                    <Row>
+                      <Col>
+                        <div className="alert alert-danger alert-button" role="alert">Log in Failed</div>
+                      </Col>
+                    </Row>
+                  </Container>
+                  : null
+                }
+
+              
+                      
              
               </Form>
-            
           </Card.Body>
-        </Card>
+
+        </Card> : 
+
+        
+          <Button className="signout" variant="info" type="submit" onClick={(e) => this.handleSignOut(e)}> Sign out </Button>
+
+      }
+
+
+        
+
+
+          
 		</div>
 		);
 	}
