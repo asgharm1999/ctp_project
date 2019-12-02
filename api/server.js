@@ -1,5 +1,8 @@
 const express = require('express');
+<<<<<<< HEAD
 const exphbs = require('express-handlebars');
+=======
+>>>>>>> fcc5535a4c8c078accd14b6f3a63152c50b14334
 const bodyParser = require('body-parser');
 const path = require('path');
 
