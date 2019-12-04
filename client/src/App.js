@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MapComponent from './components/MapComponent';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -56,6 +57,7 @@ export default class App extends React.Component {
         <Home />
         <Signup userlat={this.state.userLat} userlong={this.state.userLong}/>
       </Layout>
+      <Footer />
       </React.Fragment>
       );
   }

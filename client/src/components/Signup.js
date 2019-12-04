@@ -14,30 +14,78 @@ const SignUp_Wrapper = styled.div`
 	height: 60vh;
 `;
 
+const initialState = {
+	firstName: '',
+	firstNameError: '',
+	lastName: '',
+	lastNameError: '',
+	longitude: null,
+	latitude: null,
+	email: '',
+	emailError: '',
+	password: '',
+	passwordError: '',
+	sucesss: false,
+	error: false
+}
+
 
 export default class SignUp extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			firstName: '',
+			firstNameError: '',
 			lastName: '',
+			lastNameError: '',
 			longitude: null,
 			latitude: null,
 			email: '',
-			confirmEmail: '',
+			emailError: '',
 			password: '',
-			confirmPassword: '',
+			passwordError: '',
 			sucesss: false,
 			error: false
 
 		}
 	}
 
-	//test adding using
+	validate = () => {
+		let firstNameError = '';
+		let lastNameError = '';
+		let emailError = '';
+		let passwordError = '';
+
+		if (!this.state.firstName) {
+			firstNameError = "First name cannot be blank";
+		}
+
+		if (!this.state.lastName) {
+			lastNameError = "Last name cannot be blank";
+		}
+
+		if (!this.state.email.includes('@')) {
+			emailError = 'Invalid Email';
+		}
+
+		if (emailError || firstNameError || lastNameError) {
+			this.setState({
+				emailError, firstNameError, lastNameError
+			});
+			return false;
+		}
+		return true;
+
+	}
+
+	
 	// add if email == confirmEmail check
 
 	handleSubmit = (event) => {
 		event.preventDefault();
+
+		const isValid = this.validate();
+		if (isValid) {
 
 		console.log(event);
 
@@ -52,8 +100,8 @@ export default class SignUp extends React.Component {
 	      body: JSON.stringify(
 	      	{firstName: data.firstName,
 	      	lastName: data.lastName,
-	      	latitude: parseFloat(data.latitude),
-	      	longitude: parseFloat(data.longitude),
+	      	latitude: parseFloat(this.props.userlat),
+	      	longitude: parseFloat(this.props.userlong),
 	      	email: data.email,
 	      	password: data.password,
 	      	}),
@@ -77,10 +125,16 @@ export default class SignUp extends React.Component {
 
 	        console.log(err);
 	      });
+	      	
 			console.log('Log in data is: ', data);
+			this.setState(initialState);
 
-	
+
 		}
+
+		
+	
+	}
 
 
 	handleInputChange = (event) => {
@@ -100,61 +154,73 @@ export default class SignUp extends React.Component {
 			const userLong = this.props.userlong;
 		return(
 			//Card style is in App.css
-			<SignUp_Wrapper>
+		<SignUp_Wrapper>
 			<Card className="signup-form" bg="dark" text="white" style={{ width: '50rem' }}>
 			<Card.Body>
-            	<Card.Title>Sign up below!</Card.Title>
-            	<Card.Text>
-             	 Join our vibrant community of travelers.
-            	</Card.Text>
+			<Container>
+				<Row >
+					<Col>
+            	<Card.Title>Join our vibrant community of travelers</Card.Title>
+            		</Col>
+            	</Row>
+            </Container>
+            	
 			<Container>
 			
 				<Form onSubmit={(e) => this.handleSubmit(e)} className="formCentered">
 					<Row>
 						<Col>
-							<Form.Group controlId="formGroupName1">
-			    			<Form.Label>Enter your first name {firstName}</Form.Label>
+							<Form.Group controlId="formGroupFirstName">
+			    			<Form.Label>Enter your first name: {firstName}</Form.Label>
 						    <Form.Control 
 							    type="text" 
-							    placeholder="Enter last name" 
+							    placeholder="First name" 
 							    name="firstName" 
+							    value={this.state.firstName}
 							    onChange={(e) => this.handleInputChange(e)} />
 						  </Form.Group>
+						  <Form.Text className="error-text">{this.state.firstNameError}</Form.Text>
 						 </Col>
 
 						 <Col>
-							<Form.Group controlId="formGroupName2">
-			    			<Form.Label>Enter your last name {lastName}</Form.Label>
+							<Form.Group controlId="formGroupLastName">
+			    			<Form.Label>Enter your last name: {lastName}</Form.Label>
 						    <Form.Control 
 							    type="text" 
-							    placeholder="Enter lasr name" 
+							    placeholder="Last name" 
 							    name="lastName" 
+							    value={this.state.lastName}
 							    onChange={(e) => this.handleInputChange(e)} />
 						  </Form.Group>
+						   <Form.Text className="error-text">{this.state.lastNameError}</Form.Text>
 						 </Col>
 			 		</Row>
 			 
 			 		<Row>
 			 			<Col>
 						  <Form.Group controlId="formGroupEmail">
-						    <Form.Label>Enter your email {email}</Form.Label>
+						    <Form.Label>Enter your email: {email}</Form.Label>
 						    <Form.Control 
 							    type="email" 
-							    placeholder="Enter email" 
+							    placeholder="Email" 
 							    name="email" 
+							    value={this.state.email}
 							    onChange={(e) => this.handleInputChange(e)} />
 						  </Form.Group>
+						   <Form.Text className="error-text">{this.state.emailError}</Form.Text>
 						 </Col>
 
 						 <Col>
 						  <Form.Group controlId="formGroupPassword">
-						    <Form.Label>Enter your password {password}</Form.Label>
+						    <Form.Label>Enter your password: {password}</Form.Label>
 						    <Form.Control 
 							    type="password" 
 							    placeholder="Password" 
 							    name="password" 
+							    value={this.state.password}
 							    onChange={(e) => this.handleInputChange(e)}/>
 						  </Form.Group>
+						   <Form.Text className="error-text">{this.state.passwordError}</Form.Text>
 						 </Col>
 					
 			  		</Row>
@@ -163,14 +229,14 @@ export default class SignUp extends React.Component {
 
 			  		  <Col>
 						 	<Form.Group >
-						    <Form.Label>Your Latitude</Form.Label>
+						    <Form.Label>Your Latitude:</Form.Label>
 						      <Form.Control type="text" readOnly defaultValue={userLat} />
 						   </Form.Group>
 						 </Col>
 
 			  			<Col>
 							<Form.Group >
-						    <Form.Label>Your Longitude</Form.Label>
+						    <Form.Label>Your Longitude:</Form.Label>
 						      <Form.Control type="text" readOnly defaultValue={userLong} />
 						   </Form.Group>
 			

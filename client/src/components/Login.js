@@ -113,6 +113,7 @@ render() {
 
    
 
+
       {!this.state.isAuthenticated ? 
         <Card className={this.state.failed ? "login-form-failed" : "login-form"} >
           <Card.Body>
@@ -208,8 +209,7 @@ render() {
         
           <Button className="signout" variant="info" type="submit" onClick={(e) => this.handleSignOut(e)}> Sign out </Button>
 
-      }
-
+      } 
 
         
 
