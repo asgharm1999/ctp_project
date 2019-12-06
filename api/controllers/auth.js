@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../models');
+const { Bio } = require('../models');
 const passport = require('../middlewares/authentication');
 
 
@@ -35,5 +36,22 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.status(200).json({ message: 'Logout successful' });
 })
+
+router.post('/userbio', (req, res) => {
+  Bio.create({
+    fullName: req.body.fullName,
+    message: req.body.message,
+    recommendation: req.body.recommendation,
+    traveledTo: req.body.traveledTo,
+    wishListCities: req.body.wishListCities,
+    userId: req.user.id,
+  })
+    .then(user => {
+      /*req.login(user, () => */res.status(201).json(user);
+    })
+    .catch((err) => {
+      res.status(400).json({ msg: 'Failed user bio', err });
+    });
+});
 
 module.exports = router;

@@ -232,7 +232,7 @@ export default class SignUp extends React.Component {
 						    <Form.Label>Your Latitude:</Form.Label>
 						      <Form.Control type="text" readOnly defaultValue={userLat} />
 						   </Form.Group>
-						 </Col>
+						 </Col>	
 
 			  			<Col>
 							<Form.Group >

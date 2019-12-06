@@ -6,11 +6,9 @@ export default class Profile extends React.Component{
 	constructor(props){
 	super(props);
 	this.state = {
-		name: "Bob's ",
-		title: "Profile",
-		message: 'test',
+		name: '', 
+		message: 'Hello all',
 		recommendations: 'I like Barcelona, Rome, and Berlin!'
-
 		}
 	}
 

@@ -4,6 +4,7 @@ import MapComponent from './components/MapComponent';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
+import UserBio from './components/UserBio';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -21,7 +22,8 @@ export default class App extends React.Component {
     this.state = {
       isUserLoggedIn: false,
       userLat: null,
-      userLong: null
+      userLong: null,
+      userName: ''
     }
   }
 
@@ -29,6 +31,12 @@ export default class App extends React.Component {
   getUserStatus(status) {
       this.setState({
         isUserLoggedIn: status
+      }) 
+  }
+
+  getUserName(name) {
+      this.setState({
+        userName: name
       }) 
   }
 
@@ -56,6 +64,7 @@ export default class App extends React.Component {
       <Layout>
         <Home />
         <Signup userlat={this.state.userLat} userlong={this.state.userLong}/>
+        <UserBio getUserStatus={(e) => this.getUserStatus(e)}/>
       </Layout>
       <Footer />
       </React.Fragment>

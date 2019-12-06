@@ -47,9 +47,6 @@ export default class MapComponent extends React.Component {
           users: users,
           usersLoaded: true
         }/*, () => console.log('Users fetched...', users)*/));
-
-  
-
      }
 
 
@@ -126,7 +123,7 @@ export default class MapComponent extends React.Component {
            draggable={true}>
             <Popup>
             <Profile />
-              A pretty CSS3 popup. <br /> Easily customizable.
+              {/* A pretty CSS3 popup. <br /> Easily customizable. */}
             </Popup>
           </Marker> : '' 
         }

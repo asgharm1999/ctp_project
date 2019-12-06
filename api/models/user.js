@@ -5,9 +5,9 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    getFullname() {
-      return [this.firstName, this.lastName].join(' ');
-    }
+    // getFullName() {
+    //   return [this.firstName, this.lastName].join(' ');
+    // }
   }
 
   User.init({
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     longitude: { 
       type: DataTypes.FLOAT,
       allowNull: false
-       },
+    },
     latitude: { 
       type: DataTypes.FLOAT,
       allowNull: false 
