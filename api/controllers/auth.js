@@ -13,7 +13,11 @@ router.post('/signup', (req, res) => {
     email: req.body.email,
     password: req.body.password,
     longitude: req.body.longitude,
-    latitude: req.body.latitude
+    latitude: req.body.latitude,
+    message: req.body.message,
+    recommendation: req.body.recommendation,
+    traveledTo: req.body.recommendation,
+    wishListCities: req.body.recommendation
   })
     .then(user => {
       /*req.login(user, () => */res.status(201).json(user);
@@ -39,12 +43,11 @@ router.post('/logout', (req, res) => {
 
 router.post('/userbio', (req, res) => {
   Bio.create({
-    fullName: req.body.fullName,
     message: req.body.message,
     recommendation: req.body.recommendation,
     traveledTo: req.body.traveledTo,
     wishListCities: req.body.wishListCities,
-    userId: req.user.id,
+    userId: req.user.id
   })
     .then(user => {
       /*req.login(user, () => */res.status(201).json(user);

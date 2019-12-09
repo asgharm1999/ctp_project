@@ -8,7 +8,7 @@ const Styles = styled.div`
 		background-color:transparent !important;
 		position: absolute;
 		height: 80px;
-		width: 75%;
+		width: 10%;
 		left: 55px;
 		z-index: 20000;
 	}

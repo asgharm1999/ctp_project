@@ -8,11 +8,13 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 const SignUp_Wrapper = styled.div`
-	display: flex;
+
+`;
+
+	/*display: flex;
 	justify-content: center;
 	align-items:center;
-	height: 60vh;
-`;
+	height: 60vh;*/
 
 const initialState = {
 	firstName: '',
@@ -44,8 +46,14 @@ export default class SignUp extends React.Component {
 			emailError: '',
 			password: '',
 			passwordError: '',
+            message: '',
+            messageError: '',
+            recommendation: '',
+            traveledTo: '',
+            wishListCities: '',
 			sucesss: false,
-			error: false
+			error: false,
+			joinClicked: false
 
 		}
 	}
@@ -82,6 +90,7 @@ export default class SignUp extends React.Component {
 	// add if email == confirmEmail check
 
 	handleSubmit = (event) => {
+
 		event.preventDefault();
 
 		const isValid = this.validate();
@@ -104,6 +113,10 @@ export default class SignUp extends React.Component {
 	      	longitude: parseFloat(this.props.userlong),
 	      	email: data.email,
 	      	password: data.password,
+	      	message: data.message,
+			recommendation: data.recommendation,
+			traveledTo: data.traveledTo,
+			wishListCities: data.wishListCities,
 	      	}),
 	    })
 	      .then(res => {
@@ -117,6 +130,7 @@ export default class SignUp extends React.Component {
 	        this.setState({
 	          success: true,
 	        });
+	        this.findUserJoinStatus(post);
 	      })
 	      .catch(err => {
 	        this.setState({
@@ -129,12 +143,19 @@ export default class SignUp extends React.Component {
 			console.log('Log in data is: ', data);
 			this.setState(initialState);
 
-
+			 
 		}
-
-		
 	
 	}
+
+	  findUserJoinStatus(joinStatus) {
+	    this.props.getUserJoin(joinStatus);
+	    
+	    this.setState({
+	      joinClicked: true
+	    })
+  }
+
 
 
 	handleInputChange = (event) => {
@@ -142,20 +163,19 @@ export default class SignUp extends React.Component {
 			[event.target.name]: event.target.value
 		})
 
-
 	}
 
 
 	render() {
 		const {firstName, lastName, email, confirmEmail, password, confirmPassword,
-			longitude, latitude} = this.state;
+			longitude, latitude, message, recommendation, traveledTo, wishListCities} = this.state;
 
 			const userLat = this.props.userlat;
 			const userLong = this.props.userlong;
 		return(
 			//Card style is in App.css
-		<SignUp_Wrapper>
-			<Card className="signup-form" bg="dark" text="white" style={{ width: '50rem' }}>
+		<SignUp_Wrapper className="signup-form">
+			<Card bg="dark" text="white">
 			<Card.Body>
 			<Container>
 				<Row >
@@ -171,7 +191,7 @@ export default class SignUp extends React.Component {
 					<Row>
 						<Col>
 							<Form.Group controlId="formGroupFirstName">
-			    			<Form.Label>Enter your first name: {firstName}</Form.Label>
+			    			<Form.Label>Enter your first name:</Form.Label>
 						    <Form.Control 
 							    type="text" 
 							    placeholder="First name" 
@@ -184,7 +204,7 @@ export default class SignUp extends React.Component {
 
 						 <Col>
 							<Form.Group controlId="formGroupLastName">
-			    			<Form.Label>Enter your last name: {lastName}</Form.Label>
+			    			<Form.Label>Enter your last name:</Form.Label>
 						    <Form.Control 
 							    type="text" 
 							    placeholder="Last name" 
@@ -199,7 +219,7 @@ export default class SignUp extends React.Component {
 			 		<Row>
 			 			<Col>
 						  <Form.Group controlId="formGroupEmail">
-						    <Form.Label>Enter your email: {email}</Form.Label>
+						    <Form.Label>Enter your email:</Form.Label>
 						    <Form.Control 
 							    type="email" 
 							    placeholder="Email" 
@@ -212,7 +232,7 @@ export default class SignUp extends React.Component {
 
 						 <Col>
 						  <Form.Group controlId="formGroupPassword">
-						    <Form.Label>Enter your password: {password}</Form.Label>
+						    <Form.Label>Enter your password:</Form.Label>
 						    <Form.Control 
 							    type="password" 
 							    placeholder="Password" 
@@ -223,9 +243,6 @@ export default class SignUp extends React.Component {
 						   <Form.Text className="error-text">{this.state.passwordError}</Form.Text>
 						 </Col>
 					
-			  		</Row>
-			
-			  		<Row>
 
 			  		  <Col>
 						 	<Form.Group >
@@ -240,6 +257,60 @@ export default class SignUp extends React.Component {
 						      <Form.Control type="text" readOnly defaultValue={userLong} />
 						   </Form.Group>
 			
+						 </Col>
+					
+			  		</Row>
+
+			  			<Row>
+						<Col>
+							<Form.Group controlId="formGroupMessage">
+			    			<Form.Label>Enter a short message:</Form.Label>
+						    <Form.Control 
+							    type="text" 
+							    placeholder="Message" 
+							    name="message" 
+							    value={this.state.message}
+							    onChange={(e) => this.handleInputChange(e)} />
+						  </Form.Group>
+						  <Form.Text className="error-text">{this.state.messageError}</Form.Text>
+						 </Col>
+
+						 <Col>
+							<Form.Group controlId="formGroupRecommendation">
+			    			<Form.Label>Any travel tips?</Form.Label>
+						    <Form.Control 
+							    type="text" 
+							    placeholder="Recommendation" 
+							    name="recommendation" 
+							    value={this.state.recommendation}
+							    onChange={(e) => this.handleInputChange(e)} />
+						  </Form.Group>
+						 </Col>
+			 		
+			 
+			 	
+			 			<Col>
+						  <Form.Group controlId="formTraveledTo">
+						    <Form.Label>Cities you have been to?</Form.Label>
+						    <Form.Control 
+							    type="text" 
+							    placeholder="Traveled To" 
+							    name="traveledTo" 
+							    value={this.state.traveledTo}
+							    onChange={(e) => this.handleInputChange(e)} />
+						  </Form.Group>
+						 </Col>
+
+						 <Col>
+						  <Form.Group controlId="formWishListCities">
+						    <Form.Label>Cities you want to visit?</Form.Label>
+						    <Form.Control 
+							    type="text" 
+							    placeholder="Wish List Cities" 
+							    name="wishListCities" 
+							    value={this.state.wishListCities}
+							    onChange={(e) => this.handleInputChange(e)}/>
+						  </Form.Group>
 						 </Col>
 					
 			  		</Row>

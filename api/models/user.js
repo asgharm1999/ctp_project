@@ -40,7 +40,19 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-  }, {
+    message: { 
+      type: DataTypes.STRING,
+      allowNull: false 
+    },
+    recommendation: { type: DataTypes.STRING },
+    traveledTo: { 
+      type: DataTypes.STRING
+    },
+    wishListCities: { type: DataTypes.STRING },
+
+  },
+
+   {
     sequelize,
     modelName: 'user'
   });

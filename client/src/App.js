@@ -23,20 +23,28 @@ export default class App extends React.Component {
       isUserLoggedIn: false,
       userLat: null,
       userLong: null,
-      userName: ''
+      userName: '',
+      signupClicked: false,
+      joinClicked: false,
     }
   }
 
  //Finds if user is logged in | passed down to login component: App.js -> Home.js -> Login.js
-  getUserStatus(status) {
+  getUserStatus(userStatus) {
       this.setState({
-        isUserLoggedIn: status
+        isUserLoggedIn: userStatus
       }) 
   }
 
-  getUserName(name) {
+  getUserClick(clickStatus) {
       this.setState({
-        userName: name
+        signupClicked: clickStatus
+      }) 
+  }
+
+  getUserName(userName) {
+      this.setState({
+        userName: userName
       }) 
   }
 
@@ -45,6 +53,12 @@ export default class App extends React.Component {
         userLat: location.coords.latitude,
         userLong: location.coords.longitude
       }) 
+  }
+
+  getUserJoin(userJoin) {
+    this.setState({
+      joinClicked: userJoin
+    })
   }
 
 
@@ -59,13 +73,28 @@ export default class App extends React.Component {
         userstatus={this.state.isUserLoggedIn}  
         getUserLocation={(e) => this.getUserLocation(e)} />
       <Login 
-        getUserStatus={(e) => this.getUserStatus(e)} />
-      <Jumbotron />
+        userjoin={this.state.joinClicked}
+        getUserStatus={(e) => this.getUserStatus(e)}
+        getUserClick={(e) => this.getUserClick(e)} />
+      {/*<Jumbotron />*/}
+
+      {this.state.signupClicked && !this.state.joinClicked ? 
+          <Signup userlat={this.state.userLat} userlong={this.state.userLong}
+           getUserJoin={(e) => this.getUserJoin(e)}/>
+            : null 
+          }
       <Layout>
-        <Home />
-        <Signup userlat={this.state.userLat} userlong={this.state.userLong}/>
-        <UserBio getUserStatus={(e) => this.getUserStatus(e)}/>
+    
       </Layout>
+      {/*<Router>
+        <Switch>
+          <Route exact strict path="/" component={ Home }/>
+          <Route exact strict path="/signup" component={ Signup }/>
+          <Route exact strict path="/about" component={ About } />
+          <Route exact strict path="/contact" component={ Contact }/>
+          <Route component={ NoMatch }/>
+        </Switch>
+      </Router>*/}
       <Footer />
       </React.Fragment>
       );

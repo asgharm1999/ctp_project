@@ -121,11 +121,10 @@ export default class MapComponent extends React.Component {
            position={position} 
            icon={myIcon}
            draggable={true}>
-            <Popup>
+            <Popup className="popup-style">
             <Profile />
-              {/* A pretty CSS3 popup. <br /> Easily customizable. */}
             </Popup>
-          </Marker> : '' 
+          </Marker> : null
         }
       
         {/*this grabs all users and their locations (lats and long) if haveUsersList = true in state*/}
@@ -136,9 +135,16 @@ export default class MapComponent extends React.Component {
           <Marker key={user.id}
           position={[user.latitude, user.longitude]} 
           icon={myIcon}>
-            <Popup>
-            <Profile />
-              {user.message} <br/> Easily customizable.
+            <Popup className="popup-style">
+            <Profile 
+            firstname={user.firstName} 
+            lastname={user.lastName}
+            email={user.email}
+            message={user.message}
+            recommendation={user.recommendation}
+            traveledto={user.traveledTo}
+            wishlistcities={user.wishListCities}/>
+              
             </Popup>
           </Marker> 
         )) : ''

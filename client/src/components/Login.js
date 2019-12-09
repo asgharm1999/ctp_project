@@ -10,6 +10,9 @@ import styled from 'styled-components';
 import earthImage from '../assets/earth-globe.svg';
 import auth from '../services/auth';
 import Signup from './Signup.js';
+import {BrowserRouter, Redirect, Route} from 'react-router-dom';
+import {Router} from 'react-router-dom';
+import NoMatch from '../pages/NoMatch.js';
 
 
 
@@ -31,7 +34,9 @@ export default class Login extends React.Component {
       failed: false, 
       email: '',
 			password: '',
-      signupClicked: false
+      signUpClicked: false,
+      joinClicked: false,
+      userJoined: false
 		}
 	}
 
@@ -39,7 +44,23 @@ export default class Login extends React.Component {
     this.props.getUserStatus(this.state.isAuthenticated);
   }
 
+  findUserClickStatus(clickStatus) {
+    this.props.getUserClick(clickStatus);
+    
+    this.setState({
+      signUpClicked: clickStatus
+    })
+  }
+
+  findUserJoin() {
+    this.setState({
+      userJoined: true
+    })
+  }
+
   handleSubmit = (event) => {
+
+
   	event.preventDefault();
   	let { email, password } = this.state;
     auth.authenticate(email, password)
@@ -50,6 +71,7 @@ export default class Login extends React.Component {
             isAuthenticated: true,
             failed: false
           });
+
 
           this.findUserLogInStatus();
 
@@ -77,7 +99,8 @@ export default class Login extends React.Component {
     auth.signout(event)
     .then((event) => {
         this.setState({
-        isAuthenticated: false
+        isAuthenticated: false,
+        signUpClicked: false
       });
 
       this.findUserLogInStatus();
@@ -87,6 +110,7 @@ export default class Login extends React.Component {
 
   }
 
+
   handleInputChange = (event) => {
   	this.setState({
   			[event.target.name]: event.target.value
@@ -95,26 +119,25 @@ export default class Login extends React.Component {
   }
 
 
-
-
 render() {
 
+  const { isAuthenticated, failed } = this.state;
+	const { email, password } = this.state;
+  const { signUpClicked } = this.state;
 
-  const { isAuthenticated, failed} = this.state;
-	const {email, password} = this.state;
+  //console.log("prop value", userJoinStatus);
 
   console.log("Checking for authentication", auth.isAuthenticated);
 
   console.log("Authentication update? ", isAuthenticated, "Failed ? ", failed);
-	return(
+	
+  return(
 		<div>
 
+    {console.log("this is user clicked ", signUpClicked)}
 		{/* Card style is in App.css*/}
 
-   
-
-
-      {!this.state.isAuthenticated ? 
+      {!this.state.isAuthenticated && !this.state.signUpClicked || this.props.userjoin && !this.state.isAuthenticated ? (
         <Card className={this.state.failed ? "login-form-failed" : "login-form"} >
           <Card.Body>
           <Container>
@@ -177,8 +200,10 @@ render() {
 
 	    				       
                     <Col> 
-                    <Button type="button" 
-                    variant="info">
+                    <Button 
+                    type="button" 
+                    variant="info"
+                    onClick={(e) => this.findUserClickStatus(e)}>
                     <FontSize>Sign up</FontSize>
                     </Button>
                     </Col>
@@ -196,23 +221,22 @@ render() {
                     </Row>
                   </Container>
                   : null
+
+
                 }
 
-              
-                      
-             
               </Form>
           </Card.Body>
 
-        </Card> : 
-
+        </Card> ) : (
         
+          null
+
+      )} 
+
+        {this.state.isAuthenticated ? 
           <Button className="signout" variant="info" type="submit" onClick={(e) => this.handleSignOut(e)}> Sign out </Button>
-
-      } 
-
-        
-
+          : null}
 
           
 		</div>

@@ -1,32 +1,36 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import ListGroupItem from 'react-bootstrap/ListGroup';
 
 
 export default class Profile extends React.Component{
 	constructor(props){
 	super(props);
-	this.state = {
-		name: '', 
-		message: 'Hello all',
-		recommendations: 'I like Barcelona, Rome, and Berlin!'
-		}
 	}
 
 	render() {
 		return(
 			<div>
-			<Card style={{ width: '18rem' }}>
+			<Card className="profile-card">
 			  <Card.Body>
-			    <Card.Title>{this.state.name}{this.state.title}</Card.Title>
+			    <Card.Title>{this.props.firstname}{' '}{this.props.lastname}'s Profile</Card.Title>
 			    <Card.Subtitle className="mb-2 text-muted">Click Here to Chat</Card.Subtitle>
-			    <Card.Text>
-			      {this.state.recommendations}
-			    </Card.Text>
-			     <Card.Text>
-			      {this.state.message}
-			    </Card.Text>
-			    <Card.Link href="#">Card Link</Card.Link>
-			    <Card.Link href="#">Another Link</Card.Link>
+			      <ListGroup className="list-group-flush">
+				    <ListGroupItem>
+				    	<Card.Text>My travel recommendations:{' '}{this.props.recommendation}</Card.Text>
+				    </ListGroupItem>
+				    <ListGroupItem>
+				    	<Card.Text>Bio:{' '}{this.props.message}</Card.Text>
+				    </ListGroupItem>
+				    <ListGroupItem>
+				    	<Card.Text>Cities I've been to:{' '}{this.props.traveledto}</Card.Text>
+				    </ListGroupItem>
+				       <ListGroupItem>
+				    	<Card.Text>Cities on my travel wishlist:{' '}{this.props.wishlistcities}</Card.Text>
+				    </ListGroupItem>
+				  </ListGroup>
+
 			  </Card.Body>
 			</Card>
 			</div>

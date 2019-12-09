@@ -36,7 +36,8 @@ export default class UserBio extends React.Component {
             traveledTo: '',
             wishListCities: '',
             sucesss: false,
-            error: false
+            error: false,
+            
 		}
 	}
 
