@@ -4,8 +4,8 @@ import MapComponent from './components/MapComponent';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
-import UserBio from './components/UserBio';
 import Home from './pages/Home';
+import Chat from './components/Chat';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NoMatch from './pages/NoMatch';
@@ -84,6 +84,7 @@ export default class App extends React.Component {
             : null 
           }
       <Layout>
+        <Chat/>
     
       </Layout>
       {/*<Router>
