@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
 import Profile from './Profile.js';
 import auth from '../services/auth';
+import Alert from 'react-bootstrap/Alert';
 
 
 //creates icon used for marker/pin image
@@ -49,6 +50,13 @@ export default class MapComponent extends React.Component {
         }/*, () => console.log('Users fetched...', users)*/));
      }
 
+     openPopup (marker) {
+    if (marker && marker.leafletElement) {
+      window.setTimeout(() => {
+        marker.leafletElement.openPopup()
+      })
+    }
+  }
 
     //Asks for users location when map renders, then places a pin based on the position
     //coordinates
@@ -117,12 +125,19 @@ export default class MapComponent extends React.Component {
         {/* ternary operator ? If we have users location we render a marker and it on the map : If not
         they'll see our default map position/state */}
         {this.state.haveUsersLocation ? 
-           <Marker 
+  
+           <Marker ref={this.openPopup}
            position={position} 
            icon={myIcon}
            draggable={true}>
             <Popup className="popup-style">
-            <Profile />
+            <Profile
+              header="Join and meet fellow travelers."
+              lastname="User"
+              message="Active traveler looking to meet those who enjoy museums and local food spots."
+              recommendation="Pack light, and don't forget your toiletries."
+              traveledto="Barcelona, Berlin, Rome."
+              wishlistcities="I want to see London, Paris, and Tokyo!"/> 
             </Popup>
           </Marker> : null
         }

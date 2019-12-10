@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 
 export default class Profile extends React.Component{
@@ -12,24 +13,32 @@ export default class Profile extends React.Component{
 	render() {
 		return(
 			<div>
-			<Card className="profile-card">
+			<Card className="profile-card" bg="light">
 			  <Card.Body>
+			    <Card.Title as="h3">{this.props.header}</Card.Title>
 			    <Card.Title>{this.props.firstname}{' '}{this.props.lastname}'s Profile</Card.Title>
-			    <Card.Subtitle className="mb-2 text-muted">Click Here to Chat</Card.Subtitle>
-			      <ListGroup className="list-group-flush">
+		
+			    <Card.Subtitle className="mb-2 text-muted">	<a href={`mailto:${this.props.email}`}>Contact Me</a></Card.Subtitle>
+			      <ListGroup variant="flush">
 				    <ListGroupItem>
-				    	<Card.Text>My travel recommendations:{' '}{this.props.recommendation}</Card.Text>
+				    	<Card.Text><span className="bio-lead">My travel recommendations:</span>{' '}{this.props.recommendation}</Card.Text>
 				    </ListGroupItem>
 				    <ListGroupItem>
-				    	<Card.Text>Bio:{' '}{this.props.message}</Card.Text>
+
+				    	<Card.Text><span className="bio-lead">Bio/Message:</span>{' '}{this.props.message}
+				    	</Card.Text>
 				    </ListGroupItem>
 				    <ListGroupItem>
-				    	<Card.Text>Cities I've been to:{' '}{this.props.traveledto}</Card.Text>
+				    	<Card.Text><span className="bio-lead">Cities/Countries I've been to:</span>{' '}{this.props.traveledto}</Card.Text>
 				    </ListGroupItem>
 				       <ListGroupItem>
-				    	<Card.Text>Cities on my travel wishlist:{' '}{this.props.wishlistcities}</Card.Text>
+				    	<Card.Text><span className="bio-lead">Cities/Countries on my travel wishlist:</span>{' '}{this.props.wishlistcities}</Card.Text>
 				    </ListGroupItem>
 				  </ListGroup>
+				      <footer className="blockquote-footer">
+
+        “Live with no excuses and travel with no regrets” <cite title="Source Title">~ Oscar Wilde</cite>
+      </footer>
 
 			  </Card.Body>
 			</Card>

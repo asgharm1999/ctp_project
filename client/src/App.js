@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Chat from './components/Chat';
+//import Chat from './components/Chat';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NoMatch from './pages/NoMatch';
@@ -79,14 +79,16 @@ export default class App extends React.Component {
       {/*<Jumbotron />*/}
 
       {this.state.signupClicked && !this.state.joinClicked ? 
-          <Signup userlat={this.state.userLat} userlong={this.state.userLong}
+          <Signup userlat={this.state.userLat + (Math.random() * .11)} userlong={this.state.userLong + (Math.random() * .11)}
            getUserJoin={(e) => this.getUserJoin(e)}/>
             : null 
           }
-      <Layout>
-        <Chat/>
+
+        <Layout>
+        </Layout>
+
     
-      </Layout>
+   
       {/*<Router>
         <Switch>
           <Route exact strict path="/" component={ Home }/>

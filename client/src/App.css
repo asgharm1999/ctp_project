@@ -23,7 +23,7 @@ body {
 }
 
 .login-form:hover {
-  box-shadow: 1px 1px 2px black, 0 0 25px teal, 0 0 5px teal;
+  box-shadow: 1px 1px 2px black, 0 0 5px teal, 0 0 3px teal;
 }
 
 .login-form-failed {
@@ -81,4 +81,25 @@ body {
   background-color: black;
   text-align: center;
   font-size: 15px;
+}
+
+.leaflet-popup-content-wrapper {
+  text-align: center;
+}
+
+.leaflet-popup-content {
+  color: grey;
+  font-size: 13px;
+}
+
+.bio-lead {
+  font-style: bold;
+  color: black;
+  font-size: 15px;
+  font-weight: v300;
+  text-decoration: underline;
+}
+
+.blockquote-footer {
+  margin-top: 14px;
 }
