@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NoMatch from './pages/NoMatch';
-import PublicLayout from './PublicLayout';
-import PrivateLayout from './PrivateLayout';
+import PublicLayout from './pages/PublicLayout';
+import PrivateLayout from './pages/PrivateLayout';
 
 
 export default class App extends React.Component {

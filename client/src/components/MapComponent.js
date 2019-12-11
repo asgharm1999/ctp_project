@@ -3,7 +3,7 @@ import L from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import Profile from './Profile.js';
-
+import Loading from './Loading.js';
 
 //creates icon used for marker/pin image
 const myIcon = L.icon({
@@ -26,6 +26,7 @@ export default class MapComponent extends React.Component {
       users: [],
       usersLoaded: false,
       draggable: false,
+      loading: true,
     }
   }
 
@@ -77,6 +78,7 @@ export default class MapComponent extends React.Component {
           .then(location => {
 
             this.setState({
+                loading: false,
                 latitude: location.latitude,
                 longitude: location.longitude,
                 haveUsersLocation: true,
@@ -89,6 +91,10 @@ export default class MapComponent extends React.Component {
       }, 
 
       () => {
+
+        this.setState({
+          loading: false
+        })
   
       });
     }
@@ -100,6 +106,12 @@ export default class MapComponent extends React.Component {
 
     //grabs current users position, and passes lat, long info into marker
     const position = [this.state.latitude, this.state.longitude];
+
+    if(this.state.loading) {
+      return <Loading />
+    }
+        
+
 
     return (
       <div className="map">

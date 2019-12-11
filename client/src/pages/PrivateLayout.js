@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Chat from './components/Chat';
-import { NavigationBar } from './components/NavigationBar';
+import Chat from '../components/Chat';
+import { NavigationBar } from '../components/NavigationBar';
 
 
 export default class PrivateLayout extends React.Component {
@@ -18,7 +18,3 @@ export default class PrivateLayout extends React.Component {
       );
   }
 }
-
-
-
-// export default App;
