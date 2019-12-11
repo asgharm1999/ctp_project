@@ -18,7 +18,7 @@ body {
   top: 5px;
   right: 5px;
   height: 400px;
-  width: 16.5rem;
+  width: 22.5rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -34,6 +34,14 @@ body {
   height: 460px;
   width: 16.5rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-text {
+  font-size: 18px;
+}
+
+.login-margin {
+  margin-right: 5px;
 }
 
 .signup-form {
@@ -54,7 +62,17 @@ body {
   top: 5px;
   right: 5px;
   height: 40px;
-  width: 10.5rem;
+  width: 13.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.chatroom {
+  z-index: 999;
+  position: absolute;
+  top: 5px;
+  right: 150px;
+  height: 40px;
+  width: 13.5rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -102,4 +120,5 @@ body {
 
 .blockquote-footer {
   margin-top: 14px;
-}
+} 
+

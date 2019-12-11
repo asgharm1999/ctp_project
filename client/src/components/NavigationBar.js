@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
 import mapImage from '../assets/map.svg';
 
@@ -35,6 +35,8 @@ const Styles = styled.div`
 		cursor: pointer;
 		transition: box-shadow .3s;
 		border-radius: 10px;
+		margin-bottom: 10px;
+		margin-left: 10px;
 	}
 
 	.navbar-image:hover {
@@ -51,14 +53,11 @@ export const NavigationBar = () => (
 		        alt="Test"
 		        src={mapImage}
 		        width="100px"
-		        height="70px"
+		        height="65px"
 		        href="/"
 		      />{' '}
 
 			</Navbar.Brand>
-		{/*<Navbar.Text className="navbar-text"> 
-			<a href="/" className="navbar-text-title">Global-Port</a>
-		</Navbar.Text>*/}
 		</Navbar>
 
 	</Styles>

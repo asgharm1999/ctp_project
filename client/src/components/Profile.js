@@ -2,13 +2,10 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
+
 
 
 export default class Profile extends React.Component{
-	constructor(props){
-	super(props);
-	}
 
 	render() {
 		return(

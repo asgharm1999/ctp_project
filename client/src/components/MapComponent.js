@@ -2,10 +2,7 @@ import React from 'react';
 import L from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import styled from 'styled-components';
 import Profile from './Profile.js';
-import auth from '../services/auth';
-import Alert from 'react-bootstrap/Alert';
 
 
 //creates icon used for marker/pin image
@@ -80,8 +77,8 @@ export default class MapComponent extends React.Component {
           .then(location => {
 
             this.setState({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
+                latitude: location.latitude,
+                longitude: location.longitude,
                 haveUsersLocation: true,
                 zoom: 13,
             });
@@ -92,7 +89,6 @@ export default class MapComponent extends React.Component {
       }, 
 
       () => {
-        console.log("error");
   
       });
     }
@@ -102,10 +98,6 @@ export default class MapComponent extends React.Component {
     //finds whether displayUsers() has grabbed users
     const haveUsersList = this.state.usersLoaded;
 
-    const test = this.props.userstatus;
-
-
-    const isUserLoggedIn = this.state.isUserLoggedIn;
     //grabs current users position, and passes lat, long info into marker
     const position = [this.state.latitude, this.state.longitude];
 
@@ -113,6 +105,7 @@ export default class MapComponent extends React.Component {
       <div className="map">
 
         <Map className="map" 
+        ref={x=>window.map = x}
         center={position} 
         zoom={this.state.zoom} 
         scrollWheelZoom={false}>

@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/chatusers', (req, res) => {
+app.post('/users', (req, res) => {
     const { userId } = req.body;
 
     chatkit
@@ -37,7 +37,7 @@ app.post('/chatusers', (req, res) => {
         });
 });
 
-app.post('/chatauthenticate', (req, res) => {
+app.post('/authenticate', (req, res) => {
     const authData = chatkit.authenticate({
         userId: req.query.user_id,
     });

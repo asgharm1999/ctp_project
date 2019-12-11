@@ -1,20 +1,11 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
-import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-const SignUp_Wrapper = styled.div`
-
-`;
-
-	/*display: flex;
-	justify-content: center;
-	align-items:center;
-	height: 60vh;*/
 
 const initialState = {
 	firstName: '',
@@ -96,7 +87,6 @@ export default class SignUp extends React.Component {
 		const isValid = this.validate();
 		if (isValid) {
 
-		console.log(event);
 
 		const data = this.state;
 
@@ -167,14 +157,12 @@ export default class SignUp extends React.Component {
 
 
 	render() {
-		const {firstName, lastName, email, confirmEmail, password, confirmPassword,
-			longitude, latitude, message, recommendation, traveledTo, wishListCities} = this.state;
 
 			const userLat = this.props.userlat;
 			const userLong = this.props.userlong;
 		return(
 			//Card style is in App.css
-		<SignUp_Wrapper className="signup-form">
+		<div className="signup-form">
 			<Card bg="dark" text="white">
 			<Card.Body>
 			<Container>
@@ -325,7 +313,7 @@ export default class SignUp extends React.Component {
 			</Container>
 		</Card.Body>
         </Card>
-        </SignUp_Wrapper>
+        </div>
 
 
 		);

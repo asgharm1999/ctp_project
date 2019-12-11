@@ -4,25 +4,15 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Alert from 'react-bootstrap/Alert';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 import earthImage from '../assets/earth-globe.svg';
 import auth from '../services/auth';
-import Signup from './Signup.js';
-import {BrowserRouter, Redirect, Route} from 'react-router-dom';
-import {Router} from 'react-router-dom';
-import NoMatch from '../pages/NoMatch.js';
-
 
 
 
 const FontSize = styled.header`
 	font-size: 1rem;
-`;
-
-const ButtonWidth = styled.div`
-	width: 10px;
 `;
 
 
@@ -120,32 +110,21 @@ export default class Login extends React.Component {
 
 
 render() {
-
-  const { isAuthenticated, failed } = this.state;
-	const { email, password } = this.state;
-  const { signUpClicked } = this.state;
-
-  //console.log("prop value", userJoinStatus);
-
-  console.log("Checking for authentication", auth.isAuthenticated);
-
-  console.log("Authentication update? ", isAuthenticated, "Failed ? ", failed);
 	
   return(
 		<div>
 
-    {console.log("this is user clicked ", signUpClicked)}
 		{/* Card style is in App.css*/}
 
       {!this.state.isAuthenticated && !this.state.signUpClicked || this.props.userjoin && !this.state.isAuthenticated ? (
         <Card className={this.state.failed ? "login-form-failed" : "login-form"} >
           <Card.Body>
           <Container>
-            <Row>
-                <Col sm={8}>
-                <Card.Title>Welcome to Global-Port</Card.Title>
+            <Row className="login-margin">
+                <Col sm={9}>
+                <Card.Title className="login-text">Welcome to Global-Port</Card.Title>
                 </Col>
-                <Col sm={4}>
+                <Col sm={3}>
                     <img className="navbar-image"
                     alt="Test"
                     src={earthImage}
@@ -235,7 +214,10 @@ render() {
       )} 
 
         {this.state.isAuthenticated ? 
-          <Button className="signout" variant="info" type="submit" onClick={(e) => this.handleSignOut(e)}> Sign out </Button>
+          <div>
+            <Button className="chatroom" variant="info" type="submit" onClick={() => window.open("http://localhost:3000/chatroom", "_blank")}> Go to chatroom </Button>
+            <Button className="signout" variant="info" type="submit" onClick={(e) => this.handleSignOut(e)}> Sign out </Button>
+          </div>
           : null}
 
           

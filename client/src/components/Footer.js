@@ -12,7 +12,7 @@ const Styles = styled.div`
 		height: 70px;
 		width: 100%;
 		bottom: 0;
-		z-index: 20000000;
+		z-index: 401;
 		word-spacing: 5px;
 		font-size: 18px;
 	}
