@@ -20,7 +20,7 @@ const Dialog = props => {
             value={userId}
             default={email}
             onChange={handleInput}
-            placeholder={email}
+            placeholder={"Please type nickname here"}
             />
             <button type="submit" className="submit-btn">
             Submit
