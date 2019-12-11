@@ -7,6 +7,7 @@
 
 const auth = {
   isAuthenticated: false,
+  userId: null,
   authenticate(email, password) {
     return fetch('/api/auth/login', { 
       method: 'POST',
@@ -19,11 +20,14 @@ const auth = {
         if(!response.ok) {
           throw new Error('Login Failed');
         }
-
+        auth.userId = email;
+        console.log("after response" , this.userId);
         return response.json();
       })
       .then((body) => {
         this.isAuthenticated = true;
+        this.userId = email;
+        console.log("after body" , this.userId);
         return body;
       });
   },

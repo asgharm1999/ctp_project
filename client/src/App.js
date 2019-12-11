@@ -16,8 +16,8 @@ export default class App extends React.Component {
   
       <Router>
         <Switch>
-          <Route exact strict path="/" component={ PublicLayout }/>
-          <Route exact strict path="/chatroom" component={ PrivateLayout }/>
+          <Route exact path="/" component={ PublicLayout }/>
+          <Route exact path="/chatroom" component={ PrivateLayout }/>
           <Route component={ NoMatch }/>
         </Switch>
       </Router>

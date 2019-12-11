@@ -2,8 +2,8 @@ import React from 'react';
 import Proptypes from 'prop-types';
 
 const Dialog = props => {
-    const { userId, handleInput, connectToChatkit } = props;
-
+    const { userId, handleInput, connectToChatkit, email } = props;
+    console.log("dialog: ", email);
     return (
     <div className="dialog-container">
         <div className="dialog">
@@ -18,8 +18,9 @@ const Dialog = props => {
             type="text"
             name="userId"
             value={userId}
+            default={email}
             onChange={handleInput}
-            placeholder="Enter your username"
+            placeholder={email}
             />
             <button type="submit" className="submit-btn">
             Submit

@@ -59,7 +59,7 @@ export default class Login extends React.Component {
          
           this.setState({ 
             isAuthenticated: true,
-            failed: false
+            failed: false,
           });
 
 
@@ -115,6 +115,8 @@ render() {
 		<div>
 
 		{/* Card style is in App.css*/}
+
+      
 
       {!this.state.isAuthenticated && !this.state.signUpClicked || this.props.userjoin && !this.state.isAuthenticated ? (
         <Card className={this.state.failed ? "login-form-failed" : "login-form"} >
@@ -219,6 +221,8 @@ render() {
             <Button className="signout" variant="info" type="submit" onClick={(e) => this.handleSignOut(e)}> Sign out </Button>
           </div>
           : null}
+
+          <p>{"user id", auth.userId }</p>
 
           
 		</div>

@@ -1,17 +1,4 @@
 import React, { Component } from 'react';
-//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import MapComponent from './components/MapComponent';
-// import Login from './components/Login';
-// import Sign from './components/Signup';
-// import Footer from './components/Footer';
-// import UserBio from './components/UserBio';
-// import Home from './pages/Home';
-// import About from './pages/About';
-// import Contact from './pages/Contact';
-// import NoMatch from './pages/NoMatch';
-// import { Layout } from './components/Layout';
-// import { NavigationBar } from './components/NavigationBar';
-// import { Jumbotron } from './components/Jumbotron';
 import '../Chat.css';
 import 'skeleton-css/css/normalize.css';
 import 'skeleton-css/css/skeleton.css';
@@ -26,6 +13,7 @@ import Dialog from './Dialog';
 import RoomList from './RoomList';
 import ChatSession from './ChatSession';
 import RoomUsers from './RoomUsers';
+import auth from '../services/auth';
 
 export default class Chat extends Component {
   constructor() {
@@ -65,7 +53,10 @@ export default class Chat extends Component {
       roomName,
     } = this.state;
 
+    console.log("in chat", auth);
+
     return (
+
       <div className="Chat-Style Chat">
         <aside className="sidebar left-sidebar">
           {currentUser ? (
@@ -108,6 +99,7 @@ export default class Chat extends Component {
           {showLogin ? (
             <Dialog
               userId={userId}
+              email={auth.userId}
               handleInput={this.handleInput}
               connectToChatkit={this.connectToChatkit}
             />
