@@ -16,8 +16,8 @@ router.post('/signup', (req, res) => {
     latitude: req.body.latitude,
     message: req.body.message,
     recommendation: req.body.recommendation,
-    traveledTo: req.body.recommendation,
-    wishListCities: req.body.recommendation
+    traveledTo: req.body.traveledTo,
+    wishListCities: req.body.wishListCities
   })
     .then(user => {
       /*req.login(user, () => */res.status(201).json(user);
